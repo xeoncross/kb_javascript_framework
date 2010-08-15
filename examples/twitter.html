@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>kB Javascript Framework</title> 
+	
+	<style type="text/css">
+		html, body { height:100%; margin: 0; padding: 0; font: 1em Arial;}
+		#container { width: 600px; margin: 0 auto; }
+		div.box { width: 300px; height: 300px; background: #eee;}
+		.tweet {margin: 0 0 1em 0; padding: 0 0 1em 0; border-bottom: 1px solid #ddd;}
+		.tweet span {color: #999; font-size: 11px;padding-left: 1em;}
+	</style>
+	
+	<script src="../kB.js"></script>
+	<script>
+	
+	// The DOM creation effect multiplier (makes it load one at a time)
+	var current_tweet = 0;
+	
+	// Insert the AJAX response into the DOM
+	var insert_tweets = function(response)
+	{
+		//console.log(response); <-- Debuging
+		
+		// Decode the JSON response
+		var tweets = kb.jsonDecode(response);
+		
+		// Insert these tweets into the page one at a time
+		for (var i = 0; i < tweets.length; i++)
+		{
+			create_tweet(tweets[i]);
+		}
+	}
+	
+	// Create a new DOM element from a tweet
+	var create_tweet = function(tweet)
+	{
+		// Create a new DOM element
+		var newNode = document.createElement('div');
+		
+		// Mark this as a tweet
+		newNode.className = "tweet";
+		
+		// Set the element's HTML to the response
+		newNode.innerHTML = tweet.text + '<span>' + tweet.created_at + '</span>';
+		
+		// Slowly insert each tweet!
+		setTimeout(function()
+		{
+			// Insert a new tweet!
+			$('tweets').insertBefore(newNode,$('tweets').firstChild);
+			
+			// Do that yellow-ajax-flash thingy ;)
+			kb.yellowFade(newNode);
+			
+			// Fade this tweet out after 5 seconds - then toggle off (hide)
+			setTimeout(function(){kb.fade("out",newNode,function(){kb.toggle(newNode);})},7000);
+			
+		}, current_tweet*1000);
+		
+		// Increase multiplier by 1
+		current_tweet++;
+	}
+	
+	
+	// on DOM ready - Load the tweets using AJAX!
+	kb.ready(function()
+	{
+		kb.ajax('twitter.php',insert_tweets);
+	});
+	</script>
+</head>
+<body>
+<div id="container">
+	
+	<h1>Current Tweets</h1>
+	<div id="tweets"></div>
+	
+</div>
+</body>
+</html>

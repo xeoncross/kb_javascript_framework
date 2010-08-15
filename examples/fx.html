@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>kB Javascript Framework - Effects (FX)</title> 
+	
+	<style type="text/css">
+	html, body { height:100%; margin: 0; padding: 0;}
+	#container { text-align: center;}
+	.box { width: 200px; height: 200px; background: #eee; margin: 2em auto; border: 1px solid #555;}
+	#fading_box { background: blue; }
+	#sliding_box { background: green; }
+	#fading_sliding_box { background: orange; }
+	#yellow_fade_box { background: white; }
+	</style>
+	
+	<script src="../kB.js"></script>
+	
+	<script>
+	kb.ready(function()
+	{
+		
+		/*
+		 * Fading Box
+		 */
+		
+		// on "click" of the div
+		kb.on($('fading_box'), "click", function(e)
+		{
+			// Fade out of view
+			kb.fade("out", $('fading_box'), function()
+			{
+				// Fade back in after 1500ms
+				setTimeout(function(){kb.fade("in",$('fading_box'));}, 1500);
+			});
+			
+		});
+		
+		
+		/*
+		 * Sliding Box
+		 */
+		
+		// on "click" of the div
+		kb.on($('sliding_box'), "click", function(e)
+		{
+			// Slide out of view
+			kb.slide(0,$('sliding_box'), function()
+			{
+				// After 2 seconds slide back in
+				setTimeout(function()
+				{
+					kb.slide(1,$('sliding_box'));
+				},2000);
+			});
+		});
+		
+		
+		/*
+		 * Fading & Sliding Box
+		 */
+		
+		var el = $('fading_sliding_box');
+		
+		// on "click" of the div
+		kb.on(el, "click", function(e)
+		{
+			// Start both effects at the same time
+			kb.fade("out", el);
+			kb.slide(0,el);
+			
+			// After 2 seconds slide & fade back in
+			setTimeout(function()
+			{
+				kb.fade("in",el);
+				kb.slide(1,el);
+				
+			},2000);
+		});
+		
+		
+		/*
+		 * Yellow Fade Box
+		 */
+		
+		// on "click" of the div
+		kb.on($('yellow_fade_box'), "click", function(e)
+		{
+			// Fade out of view
+			kb.yellowFade($('yellow_fade_box'));
+		});
+		
+	});
+	</script>
+</head>
+<body>
+<div id="container">
+
+	<h1>You know you want to click them...</h1>
+	<div id="fading_box" class="box">Fading Box</div>
+	<div id="sliding_box" class="box">Sliding Box</div>
+	<div id="fading_sliding_box" class="box">Fading &amp; Sliding Box</div>
+	<div id="yellow_fade_box" class="box">Yellow Fade Box</div>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>kB Javascript Framework - AJAX Form</title> 
+	
+	<style type="text/css">
+	html, body { height:100%; margin: 0; padding: 0;}
+	#container { width: 600px; margin: 0 auto; }
+	.box { width: 300px; height: 300px; background: #eee;}
+	input { clear: both; display: block; margin: 1em 0; padding: .4em;}
+	</style>
+	
+	<script src="../kB.js"></script>
+	
+	<script>
+	kb.ready(function(){
+		
+		// On form submit
+		kb.on($('my_form'), "submit", function(e)
+		{
+			// Get all the form data
+			var post_data = kb.serialize($('my_form'));
+			
+			// Send AJAX POST request - then run insert_reponse()
+			kb.ajax('ajax.php', insert_response, post_data);
+			
+			// Cancel submit action!
+			kb.stop(e);
+		});
+		
+		// Insert the AJAX response into the DOM
+		var insert_response = function(response)
+		{
+			// Create a new DOM element
+			var newNode = document.createElement('div');
+			
+			// Set the element's HTML to the response
+			newNode.innerHTML = response;
+			
+			// Insert this element after all current elements
+			//$('response').appendChild(newNode);
+			
+			// Insert this element before all current elements
+			$('response').insertBefore(newNode,$('response').firstChild);
+			
+			// Do that yellow-ajax-flash thingy ;)
+			kb.yellowFade(newNode);
+			
+			// Fade this div out after 4 seconds
+			setTimeout(function()
+			{
+				kb.fade("out",newNode,function()
+				{
+					// ...then remove it from the DOM
+					$('response').removeChild(newNode);
+				})
+			}, 4000);
+		}
+		
+	});
+	</script>
+</head>
+<body>
+<div id="container">
+	
+	<form id="my_form" method="post" action="ajax.php">
+		<label>Input 1</label>
+		<input name="input1" value="value1" />
+		<label>Input 2</label>
+		<input name="input2" value="value2" />
+		
+		<label>Input 3[0]</label>
+		<input name="input3[]" value="3.1" />
+		
+		<label>Input 3[1]</label>
+		<input name="input3[]" value="3.2" />
+		
+		<label>Checkbox</label>
+		<input type="checkbox" checked="checked" name="checkbox" />
+		
+		<label>Radio Input</label>
+		<input type="radio" name="radio_input" />
+		
+		<label>Selectbox</label>
+		<select name="selectbox">
+			<option>yes</option>
+			<option>no</option>
+		</select>
+		
+		<input type="submit" value="Submit" />
+	</form>
+	
+	<div id="response"></div>
+	
+</div>
+</body>
+</html>

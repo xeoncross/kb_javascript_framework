@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>kB Javascript Framework - Scroll</title> 
+	
+	<style type="text/css">
+	html, body { height:100%; margin: 0; padding: 0;}
+	#container { padding: 100px; width: 4500px; height: 3000px;background: #eee;}
+	.box {
+	padding: 200px;
+	background: #fff;
+	position: absolute;
+	float: left;
+	width: 400px;
+	font-size: 3em;
+	border: 1px solid #ddd;
+	}
+	#top_left { }
+	#top_right { left: 2700px;}
+	#bottom_left { left: 700px; top: 1100px;}
+	#bottom_right { left: 2300px; top: 1500px;}
+	</style>
+	
+	<script src="../kB.js"></script>
+	
+	<script>
+	
+	kb.ready(function(){
+		
+		kb.on($('top_left'), "click", function(e)
+		{
+			kb.scrollTo($('bottom_right'), 30, 20);
+		});
+		
+		kb.on($('bottom_right'), "click", function(e)
+		{
+			kb.scrollTo($('top_right'), 30, 20);
+		});
+		
+		kb.on($('top_right'), "click", function(e)
+		{
+			kb.scrollTo($('bottom_left'), 30, 20);
+		});
+		
+		kb.on($('bottom_left'), "click", function(e)
+		{
+			kb.scrollTo($('top_left'), 30, 20);
+		});
+		
+	});
+	
+	</script>
+</head>
+<body>
+<div id="container">
+	
+	<div id="top_left" class="box">Top Left (click me!)</div>
+	<div id="top_right" class="box">Top Right</div>
+	<div id="bottom_left" class="box">Bottom Left</a></div>
+	<div id="bottom_right" class="box">Bottom Right</a></div>
+</div>
+</body>
+</html>
