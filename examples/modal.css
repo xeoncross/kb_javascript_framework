@@ -1,0 +1,41 @@
+body
+{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#modal_overlay
+{
+	cursor: pointer;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	opacity:.80;
+	filter: alpha(opacity=80);
+}
+
+#modal
+{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 16px;
+	border: 6px solid #ddd;
+	background-color: #fff;
+	z-index:1002;
+	overflow: auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* Show at top of page in IE 5-6 */
+* html #modal {position: absolute; }
+* html #modal_overlay { position: absolute; }
