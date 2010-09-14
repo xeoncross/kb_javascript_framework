@@ -2,6 +2,10 @@
 $=function(e){return e.style?e:document.getElementById(e)}
 
 var kb={
+b:function()
+{
+	return document.body;
+},
 // Element
 toggle:function(e)
 {
@@ -26,6 +30,11 @@ ready:function(f)
 ajax:function(u,f,d,x)
 {
 	x=new(window.ActiveXObject||XMLHttpRequest)('Microsoft.XMLHTTP');x.open(d?'POST':'GET',u,1);x.setRequestHeader('X-Requested-With','XMLHttpRequest');x.setRequestHeader('Content-type','application/x-www-form-urlencoded');x.onreadystatechange=function(){x.readyState>3&&f&&f(x.responseText,x)};x.send(d)
+},
+// Form, AJAX Callback
+ajaxForm:function(f,c)
+{
+	kb.on((f=$(f)),'submit',function(e){kb.ajax(f.action,c,kb.serialize(f));kb.stop(e)});
 },
 // Element
 serialize:function(f)
@@ -94,5 +103,34 @@ windowPos:function()
 stop:function(e)
 {
 	e.preventDefault?e.preventDefault():e.returnValue=0
+},
+// Element/HTML, Width, Height, Callback, not-closable?, Frames
+modal:function(e,w,h,c,x,f,m,o)
+{
+	o=document.createElement('div');o.id='modal_overlay';kb.b().appendChild(o);if(!x){kb.on(o,'click',function(){kb.closeModal();});}m=document.createElement('div');m.id='modal';e.style?m.appendChild(e):m.innerHTML=e;setTimeout(function(p){kb.b().appendChild(m);if(!w||!h){o=kb.pos(m);w=o.w;h=o.h;}m.style.width=w+'px';m.style.height=h+'px';m.style.marginLeft=-w/2+'px';m.style.marginTop=-h/2+'px';kb.fade('in',m,c,f?f:10);if(e=$('modal_close')){kb.on(e,'click',function(e){kb.closeModal();return kb.stop(e);});}},100);
+},
+closeModal:function()
+{
+	kb.remove($('modal'));kb.remove($('modal_overlay'));
+},
+// Class
+lightbox:function(c,e)
+{
+	if(e=kb.getByClassName(c?c:'lightbox'))for(k in e){kb.on(e[k],'click',function(e){kb.modal('<img src="'+this.href+'" />');return kb.stop(e);});}
+},
+// Element
+remove:function(e)
+{
+	e.parentNode.removeChild(e);
+},
+// Value, Array, useless var
+index:function(v,a,i)
+{
+	for(i=a.length;i--&&a[i]!=v;);return i
+},
+// Class, Document
+getByClassName:function(n,d,y,k,h)
+{
+	y=(d?d:document).getElementsByTagName("*");h=[];for(k=y.length;k--;)kb.index(n,y[k].className.split(" "))>-1&&h.push(y[k]);return h
 }
 }
