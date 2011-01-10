@@ -31,6 +31,11 @@ ajax:function(u,f,d,x)
 {
 	x=new(window.ActiveXObject||XMLHttpRequest)('Microsoft.XMLHTTP');x.open(d?'POST':'GET',u,1);x.setRequestHeader('X-Requested-With','XMLHttpRequest');x.setRequestHeader('Content-type','application/x-www-form-urlencoded');x.onreadystatechange=function(){x.readyState>3&&f&&f(x.responseText,x)};x.send(d)
 },
+// Object
+uriEncode:function(o,y,x)
+{
+	y='';for(x in o)y+='&'+x+'='+encodeURIComponent(o[x]);return y.slice(1)
+},
 // Form, AJAX Callback
 ajaxForm:function(f,c)
 {
