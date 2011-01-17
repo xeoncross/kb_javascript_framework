@@ -1,0 +1,45 @@
+.previewdiv { margin: 1em 0; padding: 1em; border: 1px solid #ddd; }
+
+td {padding: 2em; vertical-align:top; }
+
+.texteditormenu
+{
+	height: 16px;
+	padding: 4px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	background: #f6f6f6; /* old browsers */
+	background: -moz-linear-gradient(top, #f6f6f6 0%, #E5E5E5 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#E5E5E5)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#E5E5E5',GradientType=0 ); /* ie */
+}
+
+.texteditormenu button
+{
+	float: left;
+	width: 16px;
+	height: 16px;
+	text-indent: -9999px;
+	margin: 0 10px 0 0;
+	border: none;
+}
+.texteditormenu div:active {background-color: #eee;}
+
+/* Awesome Icons: http://www.famfamfam.com/lab/icons/silk/ */
+.texteditormenu .bold {background: url(icons/text_bold.png) no-repeat;}
+.texteditormenu .blockquote {background: url(icons/text_indent.png) no-repeat;}
+.texteditormenu .ul {background: url(icons/text_list_bullets.png) no-repeat;}
+.texteditormenu .ol {background: url(icons/text_list_numbers.png) no-repeat;}
+.texteditormenu .strike {background: url(icons/text_strikethrough.png) no-repeat;}
+.texteditormenu .italic {background: url(icons/text_italic.png) no-repeat;}
+.texteditormenu .img {background: url(icons/picture_add.png) no-repeat;}
+.texteditormenu .link {background: url(icons/link.png) no-repeat;}
+.texteditormenu .code {background: url(icons/page_code.png) no-repeat;}
+.texteditormenu .pre {background: url(icons/text_columns.png) no-repeat;}
+.texteditormenu .blockquote {background: url(icons/comment.png) no-repeat;}
+.texteditormenu .acronym {background: url(icons/font.png) no-repeat;}
+.texteditormenu .tab {background: url(icons/text_indent.png) no-repeat;}
+.texteditormenu .lowercase {background: url(icons/text_lowercase.png) no-repeat;}
+.texteditormenu .uppercase {background: url(icons/text_uppercase.png) no-repeat;}
+
+textarea { width: 500px; height: 200px; }

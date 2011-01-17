@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>kB Javascript Framework - Textarea Editor</title>
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="../../kB.js"></script>
+	<script src="kb.editor.js"></script>
+	
+	<script type="text/javascript">
+	kb.ready(function()
+	{
+		// HTML editor menu elements
+		var menu_items = [
+			{ label : 'Bold', id : 'bold', open : '<b>', close : '</b>', callback : function(t) { return t.replace(/\n/g,"</b>\n<b>") } },
+			{ label : 'Italic', id : 'italic', open : '<i>', close : '</i>', callback : function(t) { return t.replace(/\n/g,"</i>\n<i>") } },
+			{ label : 'Strike', id : 'strike', open : '<strike>', close : '</strike>', callback : function(t) { return t.replace(/\n/g,"</strike>\n<strike>") } },
+			{ label : 'Acronym', id : 'acronym', open : "<acronym title=\"", close : '</acronym>', callback : function(t) {
+					return prompt("Please define the acronym","")+"\"> "+t;
+				}
+			},
+			{ label : 'Lowercase', id : 'lowercase', open : "", close : "", callback : function(t) { return t.toLowerCase(); } },
+			{ label : 'Uppercase', id : 'uppercase', open : "", close : "", callback : function(t) { return t.toUpperCase(); } },
+			{ label : 'UL', id : 'ul', open : "<ul>\n\t<li>", close : "</li>\n</ul>", callback : function(t) { return t.replace(/\n/g,"</li>\n\t<li>") } },
+			{ label : 'OL', id : 'ol', open : "<ol>\n\t<li>", close : "</li>\n</ol>", callback : function(t) { return t.replace(/\n/g,"</li>\n\t<li>") } },
+			{ label : 'Tab', id : 'tab', open : "\t", close : "", callback : function(t) { return t.replace(/\n/g,"\n\t") } },
+			{ label : 'Code', id : 'code', open : "<code>\n", close : "\n</code>", callback : '' },
+			{ label : 'Preformatted', id : 'pre', open : "<pre>\n", close : "\n</pre>", callback : '' },
+			{ label : 'Quote', id : 'blockquote', open : "<blockquote>\n", close : "\n</blockquote>", callback : '' },
+			{ label : 'Link', id : 'link', open : "<a href=\"", close : "</a>", callback : function(t){ return prompt("Please enter the link URL","")+'">'+t; } },
+			{ label : 'Image', id : 'img', open : "<img src=\"", close : '', callback : function(t){ return prompt("Please enter the image URL","")+"\"> "+t; } }
+		];
+		
+		// Create the editor and allow tabs
+		createTextEditor($('text'), menu_items, true);
+		
+		// Create another one without tabbing
+		createTextEditor($('text2'),menu_items); // Create the editor
+	});
+	</script>
+</head>
+<body>
+
+<table><tr><td>
+
+<h2>Textarea with Tabbing</h2>
+<textarea id="text">
+This is some text and what not.
+
+Even with <i>multiple lines</i>.
+And another one!
+
+<code>
+&lt;script type="text/css">
+
+// Create the editor and allow tabs
+createTextEditor($('text'), menu_items, true);
+
+&lt;/script>
+</code>
+
+This is some text and what not.
+</textarea>
+<div id="textpreview" class="previewdiv"></div>
+
+</td><td>
+
+<h2>Textarea without Tabbing</h2>
+<textarea id="text2">
+This is some text and what not.
+
+Even with multiple lines.
+And another one!
+
+This is some text and what not.
+</textarea>
+<div id="text2preview" class="previewdiv"></div>
+
+</tr></table>
+
+</body>
+</html>

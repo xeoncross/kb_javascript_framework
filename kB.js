@@ -137,5 +137,10 @@ index:function(v,a,i)
 getByClassName:function(n,d,y,k,h)
 {
 	y=(d?d:document).getElementsByTagName("*");h=[];for(k=y.length;k--;)kb.index(n,y[k].className.split(" "))>-1&&h.push(y[k]);return h
+},
+// Get selected text
+selection:function()
+{
+	var e=window.getSelection,k=document.getSelection,x=document.selection;return(e?e():(k)?k():(x?x.createRange().text:0));
 }
 }
