@@ -12,6 +12,7 @@ This is a tiny JavaScript framework that includes everything needed by most site
  * Serializing Form Data
  * Creating Modals
  * Image Lightboxes
+ * Markdown, BBCode, or HTML textarea editor
  * Scrolling the browser window
  * Adding functions to DOM ready
  * Adding functions to element events (onClick/Submit/Hover etc..)
